@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --color-primary: #F5F5F5;         /* Background: #F5F5F5 (Modern Minimal Light Gray) */
+  --color-secondary: #FFFFFF;       /* Card White: #FFFFFF */
+  --color-darkest: #E5E7EB;         /* Light Gray: #E5E7EB */
+  --color-accent: #2563EB;          /* Primary Blue: #2563EB */
+  --color-accent-light: #3B82F6;    /* Soft Blue for hover triggers */
+  --color-muted: #4B5563;           /* Muted gray text color */
+  --color-white: #111827;           /* Dark Text: #111827 */
+  --color-border: #E5E7EB;          /* Sleek light grey dividers */
+  --card-radius: 20px;              /* Apple-like soft 20px curved borders */
+
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+/* ===== DARK THEME OVERLAY (Cinematic Black & Gold) ===== */
+.dark-theme {
+  --color-primary: #0B0B0B;         /* Main Background: #0B0B0B */
+  --color-secondary: #111111;       /* Secondary Background: #111111 */
+  --color-darkest: #070707;         /* Absolute pitch black base */
+  --color-accent: #D4AF37;          /* Gold Accent: #D4AF37 */
+  --color-accent-light: #F5D76E;    /* Soft glowing yellow-gold for animations */
+  --color-muted: #B3B3B3;           /* Gray Text: #B3B3B3 */
+  --color-white: #FFFFFF;           /* Text White: #FFFFFF */
+  --color-border: rgba(255, 255, 255, 0.1); /* Card border: rgba(255,255,255,0.1) */
+  --card-radius: 20px;              /* Clean 20px curve matching luxury glass specs */
+  
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Poppins", sans-serif;
+}
+
+/* ===== BASE RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-light);
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-glow {
+  text-shadow: 0 0 20px rgba(201, 169, 110, 0.3),
+               0 0 40px rgba(201, 169, 110, 0.1);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 50%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient {
+  border-image: linear-gradient(135deg, var(--color-accent), transparent) 1;
+}
+
+/* ===== GRAIN TEXTURE OVERLAY ===== */
+.grain-overlay::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ===== DIAGONAL SECTION DIVIDER ===== */
+.diagonal-top {
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+}
+.diagonal-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+/* ===== GOLD PARTICLE CONTAINER ===== */
+.gold-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gold-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-float 8s ease-in-out infinite;
+}
+
+@keyframes particle-float {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20vh) scale(1);
+  }
+}
+
+/* ===== SWIPER CUSTOM STYLES ===== */
+.swiper-pagination-bullet {
+  background: var(--color-accent) !important;
+  opacity: 0.4 !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(17, 17, 17, 0.15);
+}
+.back-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(17, 17, 17, 0.25);
+}
+
+/* ===== LUXURY GALLERY IMAGE BORDER FRAME ===== */
+.premium-img-frame {
+  padding: 0.35rem; /* Museum mat padding border offset */
+  background-color: var(--color-primary);
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+  overflow: hidden;
+}
+
+.premium-img-frame:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* ===== PREMIUM DYNAMIC GLASSMORPHISM & SOFT SHADOW CARD ===== */
+.premium-card {
+  border-radius: var(--card-radius) !important;
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.premium-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-accent);
+}
+
+/* ===== DARK THEME SPECIAL CLASS ADAPTATIONS ===== */
+.dark-theme .premium-img-frame {
+  background-color: #111111;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .premium-img-frame:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+}
+
+.dark-theme .premium-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .premium-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.15);
+  border-color: var(--color-accent) !important;
+}
+
+.dark-theme .glass-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .text-glow {
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.35),
+               0 0 40px rgba(212, 175, 55, 0.15);
+}
+
