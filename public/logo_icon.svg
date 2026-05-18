@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+  <path
+    d="M40 8L12 30V68H30V48H50V68H68V30L40 8Z"
+    stroke="#C9A96E"
+    stroke-width="3.5"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <path 
+    d="M35 48H45V68H35V48Z" 
+    stroke="#C9A96E" 
+    stroke-width="2.2" 
+    stroke-linejoin="round"
+    fill="none" 
+  />
+</svg>
